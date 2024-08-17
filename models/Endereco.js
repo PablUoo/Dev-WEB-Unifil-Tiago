@@ -1,9 +1,13 @@
-const { DataTypes, Model } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
+
+
 class Endereco extends Model {}
 
 Endereco.init({
     id:{
         type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
     },
     cep:{
@@ -20,7 +24,7 @@ Endereco.init({
     },
     complemento:{
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     bairro:{
         type: DataTypes.STRING,
@@ -42,6 +46,6 @@ Endereco.init({
     sequelize,
     modelName: 'Endereco',
     tableName: 'enderecos',
-    timestamps: true
+    timestamps: true,
 });
 module.exports = Endereco;
