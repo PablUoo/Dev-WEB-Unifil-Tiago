@@ -11,6 +11,8 @@ app.get('/index', (req, res) => {
     res.send('index');
 });
 
+app.listen(3000, () => console.log(`Servidor rodando em http://localhost:3000`));
+
 // const axios = require('axios');
 // const cepRegex = /^[0-9]{5}-?\[0-9]{3}$/;
 // app.get('/consulta-cep/:cep', async (req, res) => {
@@ -41,6 +43,3 @@ app.get('/index', (req, res) => {
 //         res.status(500).send("Erro ao consultar Moeda");
 //     }
 // });
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor rodando em http://localhost:${port}`));

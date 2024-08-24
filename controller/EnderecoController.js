@@ -114,7 +114,7 @@ exports.createEnderecoViaCep = async (req, res) => {
             ibge: ibge
         });
 
-        res.status(201).json(novoEndereco);
+        res.status(201).json({endereco: novoEndereco});
     } catch (error) {
         res.status(500).json({ error: 'Falha ao criar um novo endereço a partir do CEP', details: error.message });
     }
