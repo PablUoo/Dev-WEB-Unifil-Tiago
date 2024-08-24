@@ -3,16 +3,16 @@ const axios = require('axios');
 
 exports.createEndereco = async (req, res) => {
     try{
-        const{ Cep, Logradouro, Numero, Complemento, Bairro, Cidade, Estado, MunicipioIBGE } = req.body;
+        const{ cep, logradouro, numero, complemento, bairro, cidade, estado, ibge } = req.body;
         const novoEndereco = await Endereco.create({
-            Cep,
-            Logradouro,
-            Numero,
-            Complemento,
-            Bairro,
-            Cidade,
-            Estado,
-            MunicipioIBGE
+            cep,
+            logradouro,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado,
+            ibge
         });
 
         res.status(201).json(novoEndereco);
@@ -91,7 +91,7 @@ exports.deleteEndereco = async (req, res) => {
     }
 };
 
-exports.createEnderecoFromCep = async (req, res) => {
+exports.createEnderecoViaCep = async (req, res) => {
     try {
         const cep = req.body.cep;
 
@@ -101,13 +101,13 @@ exports.createEnderecoFromCep = async (req, res) => {
             return res.status(404).json({ error: 'CEP não encontrado' });
         }
 
-        const { logradouro, complemento, bairro, localidade, uf, ibge } = api.data;
+        const { logradouro, bairro, localidade, uf, ibge } = api.data;
         
         const novoEndereco = await Endereco.create({
             cep: cep,
             logradouro: logradouro,
             numero: req.body.numero,
-            complemento: complemento || req.body.complemento,
+            complemento: req.body.complemento,
             bairro: bairro,
             cidade: localidade,
             estado: uf,
