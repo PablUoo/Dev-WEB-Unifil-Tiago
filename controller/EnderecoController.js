@@ -15,7 +15,7 @@ exports.createEndereco = async (req, res) => {
             ibge
         });
 
-        res.status(201).json(novoEndereco);
+        res.status(201).json({endereco: novoEndereco});
     } catch (error) {
         res.status(500).json({ error: 'Falha ao criar um novo endereço', details: error.message });
     }
@@ -47,23 +47,23 @@ exports.getEnderecoById = async (req, res) => {
 
 exports.updateEndereco = async (req, res) => {
   try {
-    const { Id } = req.params;
-    const{ Cep, Logradouro, Numero, Complemento, Bairro, Cidade, Estado, MunicipioIBGE } = req.body;
+    const { id } = req.params;
+    const{ cep, logradouro, numero, complemento, bairro, cidade, estado, ibge } = req.body;
 
-    const endereco = await Endereco.findByPk(Id);
+    const endereco = await Endereco.findByPk(id);
 
     if (!endereco) {
         return res.status(404).json({ error: 'Endereço não encontrado '});
     }
     
-    endereco.Cep = Cep;
-    endereco.Logradouro = Logradouro;
-    endereco.Numero = Numero;
-    endereco.Complemento = Complemento;
-    endereco.Bairro = Bairro;
-    endereco.Cidade = Cidade;
-    endereco.Estado = Estado;
-    endereco.MunicipioIBGE = MunicipioIBGE;
+    endereco.cep = cep;
+    endereco.logradouro = logradouro;
+    endereco.numero = numero;
+    endereco.complemento = complemento;
+    endereco.bairro = bairro;
+    endereco.cidade = cidade;
+    endereco.estado = estado;
+    endereco.ibge = ibge;
 
     await endereco.save();
 
